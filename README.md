@@ -1,10 +1,10 @@
 # Containator
 
-CLI tool that generates awesome components following the Container/Presenter pattern for React Projects.
+CLI tool that generates awesome components following the Container/Presenter pattern for React projects.
 
-## Installation (coming soon)
+## Installation
 
-For better taste, install globally 🌏
+For better experience shake before use and install globally 🌏
 
 #### yarn
 
