@@ -2,7 +2,9 @@
 
 CLI tool that generates awesome components following the Container/Presenter pattern for React Projects.
 
-## Installation
+## Installation (coming soon)
+
+For better taste, install globally 🌏
 
 #### yarn
 
@@ -17,6 +19,8 @@ npm install -g containator
 ```
 
 ## Usage
+
+Just run:
 
 `containator create Awesome`
 

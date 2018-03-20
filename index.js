@@ -100,6 +100,9 @@ program
             `${containerName}/${containerName}Presenter.js`,
             presenterContent(containerName, false, true)
           );
+          console.log(
+            `✨ ${containerName} Component created with Styled-Components 💅 (great taste btw)`
+          );
         } else if (command.css) {
           /*
             If the user chose css then we create a file
@@ -111,6 +114,7 @@ program
             presenterContent(containerName, true, false)
           );
           createFile(`${containerName}/${containerName}Styles.css`, "");
+          console.log(`✨ ${containerName} Component and CSS file created`);
         }
       } else {
         /*
@@ -121,6 +125,7 @@ program
           `${containerName}/${containerName}Presenter.js`,
           presenterContent(containerName)
         );
+        console.log(`✨ ${containerName} Component created`);
       }
     } else {
       /*
