@@ -1,2 +1,3 @@
-# containator
-CLI tool that generates awesome containers for React Projects
+# Containator
+
+CLI tool that generates awesome components following the Container/Presenter pattern for React Projects.
