@@ -20,17 +20,37 @@ npm install -g containator
 
 ## Usage
 
-Just run:
+### 🚧 Warning: 🚧
 
-`containator create Awesome`
+Containator will create a folder with your component's name, if the folder is already created it won't create anything since it would be dangerous to overwrite.
+
+1.  Go to the folder where you want to create the component:
+
+    ```console
+    nico@coder:~$ cd Components
+    ```
+
+2.  Run containator where 'Awesome' is the name of your component:
+
+    ```console
+    nico@coder:/Components$ containator create Awesome
+    ```
+
+3.  Go inside to see the magic ✨
+
+    ```console
+    nico@coder:/Components$ cd Awesome && ls
+    ```
+
+Enjoy!
 
 That will create a folder with the following file structure:
 
-```
+```bash
 Awesome
-    AwesomeContainer.js
-    AwesomePresenter.js
-    index.js
+├── AwesomeContainer.js
+├── AwesomePresenter.js
+├── index.js
 ```
 
 ### What about CSS?
@@ -43,10 +63,10 @@ That will create a folder with the following file structure:
 
 ```
 Awesome
-    AwesomeContainer.js
-    AwesomePresenter.js
-    Awesome.css
-    index.js
+├── AwesomeContainer.js
+├── AwesomePresenter.js
+├── Awesome.css
+├── index.js
 ```
 
 ### What if I use styled-components?
@@ -63,23 +83,23 @@ I'm glad you asked!
 
 #### index.js:
 
-```
+```js
 import AwesomeContainer from "./AwesomeContainer";
 export default AwesomeContainer;
 ```
 
 #### AwesomeContainer.js:
 
-```
+```js
 import React, { Component } from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import AwesomePresenter from "./AwesomePresenter";
 
-class AwesomeContainer extends Component{
-  static propTypes = {}
-  state = {}
-  render(){
-    return <AwesomePresenter {...this.state}/>
+class AwesomeContainer extends Component {
+  static propTypes = {};
+  state = {};
+  render() {
+    return <AwesomePresenter {...this.state} />;
   }
 }
 export default AwesomeContainer;
@@ -87,43 +107,49 @@ export default AwesomeContainer;
 
 #### AwesomePresenter.js without CSS:
 
-```
+```js
 import React from "react";
 import PropTypes from "prop-types";
 
-const BabyPresenter = ({}) => "Make something awesome!";
+const AwesomePresenter = ({}) => "Make something awesome!";
 
-BabyPresenter.propTypes = {}
+AwesomePresenter.propTypes = {};
 
-export default BabyPresenter;
+export default AwesomePresenter;
 ```
 
 #### AwesomePresenter.js with CSS:
 
-```
+```js
 import React from "react";
 import PropTypes from "prop-types";
-import "AwesomeStyles.css"
+import "AwesomeStyles.css";
 
-const BabyPresenter = ({}) => "Make something awesome!";
+const AwesomePresenter = ({}) => "Make something awesome!";
 
-BabyPresenter.propTypes = {}
+AwesomePresenter.propTypes = {};
 
-export default BabyPresenter;
+export default AwesomePresenter;
 ```
 
 #### AwesomePresenter.js with Styled Components:
 
-```
+```js
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const BabyPresenter = ({}) => "Make something awesome!";
+const AwesomePresenter = ({}) => "Make something awesome!";
 
-BabyPresenter.propTypes = {}
+AwesomePresenter.propTypes = {};
 
-export default BabyPresenter;
+export default AwesomePresenter;
 ```
 
-Stay cool, be happy and make beautiful stuff!
+# Credits
+
+This CLI was made with ❤️ by Nico from [Nomad Coders](http://academy.nomadcoders.co) , if you have any problems using it please open a pull request or contact me via [slack](http://nomadcoders.now.sh).
+
+Stay cool 😎, be happy 😬 and make beautiful stuff 💅🏻
+
+~ Nico & Lynn
