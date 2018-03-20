@@ -22,6 +22,7 @@ class ${name}Container extends Component{
     return <${name}Presenter {...this.state}/>
   }
 }
+
 export default ${name}Container;
 `;
 
@@ -91,11 +92,20 @@ program
       */
       if (command.styled || command.css) {
         if (command.styled) {
+          /*
+            If the user chose styled then we create a file
+            that has an import to styled components
+          */
           createFile(
             `${containerName}/${containerName}Presenter.js`,
             presenterContent(containerName, false, true)
           );
         } else if (command.css) {
+          /*
+            If the user chose css then we create a file
+            that has an import to a css file and we 
+            create an empty css file.
+          */
           createFile(
             `${containerName}/${containerName}Presenter.js`,
             presenterContent(containerName, true, false)
@@ -104,7 +114,7 @@ program
         }
       } else {
         /*
-          If he didn't select any of them we just
+          If the user didn't select any of them we just
           create a file with no imports
         */
         createFile(
