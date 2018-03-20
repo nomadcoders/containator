@@ -49,7 +49,7 @@ const createFile = (location, content, encoding = FILE_ENCODING) => {
 };
 
 program
-  .version("1.0.0")
+  .version("1.0.4")
   .action(() => program.help())
   .description(
     "CLI tool that generates awesome components following the Container/Presenter pattern for React Projects."
