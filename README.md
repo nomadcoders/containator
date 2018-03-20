@@ -42,7 +42,7 @@ Containator will create a folder with your component's name, if the folder is al
     nico@coder:/Components$ cd Awesome && ls
     ```
 
-Enjoy!
+4.  Enjoy!
 
 That will create a folder with the following file structure:
 
@@ -144,6 +144,20 @@ const AwesomePresenter = ({}) => "Make something awesome!";
 AwesomePresenter.propTypes = {};
 
 export default AwesomePresenter;
+```
+
+# CLI Options
+
+```console
+  Usage: create|c [options] <container>
+
+  Creates a component
+
+  Options:
+
+    --styled    Creates a component with Styled Components import
+    --css       Creates a component with a .css file imported
+    -h, --help  output usage information
 ```
 
 # Credits
