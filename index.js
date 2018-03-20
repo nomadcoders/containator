@@ -56,7 +56,7 @@ program
   );
 
 program
-  .command("create <containercd>")
+  .command("create <container>")
   .option("--styled", "Creates a component with Styled Components import")
   .option("--css", "Creates a component with a .css file imported")
   .alias("c")
