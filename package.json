@@ -1,6 +1,6 @@
 {
   "name": "containator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CLI tool that generates awesome components following the Container/Presenter pattern for React projects",
   "main": "index.js",
   "repository": "https://github.com/nomadcoders/containator",
