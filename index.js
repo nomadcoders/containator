@@ -12,14 +12,14 @@ export default ${name}Container;`;
 
 const containerContent = name =>
   `import React, { Component } from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import ${name}Presenter from "./${name}Presenter";
 
-class ${name}Container extends Component{
-  static propTypes = {}
-  state = {}
-  render(){
-    return <${name}Presenter {...this.state}/>
+class ${name}Container extends Component {
+  static propTypes = {};
+  state = {};
+  render() {
+    return <${name}Presenter {...this.state} />;
   }
 }
 
@@ -34,7 +34,7 @@ ${css ? `import "./${name}Styles.css";\n` : ``}${
   }
 const ${name}Presenter = ({}) => "Make something awesome!";
 
-${name}Presenter.propTypes = {}
+${name}Presenter.propTypes = {};
 
 export default ${name}Presenter;
 `;

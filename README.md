@@ -46,7 +46,7 @@ Containator will create a folder with your component's name, if the folder is al
 
 That will create a folder with the following file structure:
 
-```bash
+```
 Awesome
 ├── AwesomeContainer.js
 ├── AwesomePresenter.js
@@ -59,7 +59,7 @@ Containator can also create a CSS file for you and import it on the presenter co
 
 `containator create Awesome --css`
 
-That will create a folder with the following file structure:
+That will create a folder with the component plus the CSS file imported on the presenter component:
 
 ```
 Awesome
