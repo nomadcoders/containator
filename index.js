@@ -26,7 +26,7 @@ class ${name}Container extends Component {
 export default ${name}Container;
 `;
 
-const presenterContent = (name, css = false, styled = false) =>
+const presenterContent = (name, css = false, styled = false, scss = false) =>
   `import React from "react";
 import PropTypes from "prop-types";
 ${css ? `import "./${name}Styles.css";\n` : ``}${
@@ -119,7 +119,7 @@ program
         } else if (command.scss) {
           createFile(
             `${containerName}/${containerName}Presenter.js`,
-            presenterContent(containerName, true, false)
+            presenterContent(containerName, false, false, true)
           );
           createFile(`${containerName}/${containerName}Styles.scss`, "");
           console.log(`✨ ${containerName} Component and SCSS file created`);
