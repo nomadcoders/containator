@@ -31,7 +31,7 @@ const presenterContent = (name, css = false, styled = false, scss = false) =>
 import PropTypes from "prop-types";
 ${css ? `import "./${name}Styles.css";\n` : ``}${
     styled ? `import styled from "styled-components";\n` : ``
-  }${styled ? `import "./${name}Styles.scss";\n` : ``}
+  }${scss ? `import "./${name}Styles.scss";\n` : ``}
 const ${name}Presenter = ({}) => "Make something awesome!";
 
 ${name}Presenter.propTypes = {};
