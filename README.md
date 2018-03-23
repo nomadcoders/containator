@@ -42,9 +42,7 @@ Containator will create a folder with your component's name, if the folder is al
     nico@coder:/Components$ cd Awesome && ls
     ```
 
-4.  Enjoy!
-
-That will create a folder with the following file structure:
+4.
 
 ```
 Awesome
@@ -68,6 +66,10 @@ Awesome
 ├── Awesome.css
 ├── index.js
 ```
+
+### Is SCSS also supported?
+
+Sure! Just run `containator create Awesome --scss`
 
 ### What if I use styled-components?
 

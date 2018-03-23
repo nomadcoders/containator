@@ -59,6 +59,7 @@ program
   .command("create <container>")
   .option("--styled", "Creates a component with Styled Components import")
   .option("--css", "Creates a component with a .css file imported")
+  .option("--scss", "Creates a component with a .scss file imported")
   .alias("c")
   .description("Creates a component")
   .action((container, command) => {
@@ -90,7 +91,7 @@ program
       /*
        We check if the user selected any of the available Styling options
       */
-      if (command.styled || command.css) {
+      if (command.styled || command.css || command.scss) {
         if (command.styled) {
           /*
             If the user chose styled then we create a file
@@ -115,6 +116,13 @@ program
           );
           createFile(`${containerName}/${containerName}Styles.css`, "");
           console.log(`✨ ${containerName} Component and CSS file created`);
+        } else if (command.scss) {
+          createFile(
+            `${containerName}/${containerName}Presenter.js`,
+            presenterContent(containerName, true, false)
+          );
+          createFile(`${containerName}/${containerName}Styles.scss`, "");
+          console.log(`✨ ${containerName} Component and SCSS file created`);
         }
       } else {
         /*
