@@ -1,6 +1,6 @@
 # Containator
 
-CLI tool that generates awesome components following the Container/Presenter pattern for React projects.
+Generate customizable React Components following the Container/Presenter Pattern.
 
 ## Installation
 
@@ -24,6 +24,32 @@ npm install -g containator
 
 Containator will create a folder with your component's name, if the folder is already created it won't create anything since it would be dangerous to overwrite.
 
+### Command:
+
+```console
+containator <NameOfComponent>
+```
+
+Before you can use it create a `containerOptions.json` file on the root folder of your project so you can customize the files that are gonna be generated, these are the options:
+
+| Name       | Description                                                                                                                                                                     | Type                 | Default |
+| ---------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------: | :-----: |
+| styles     | Choose if you want to get a .css file created and imported to the presenter component or if you want an import to `styled-components`                                           | enum('styled','css') | css     |
+| typescript | If you are using Typescript this option will create interfaces for both the class component on the container and the stateless component on the presenter, also .ts extensions. | boolean              | false   |
+
+
+Example of `containerOptions.json` file:
+
+````json
+{
+  "styles": "css",
+  "typescript": true
+}
+
+````
+
+### Example of usage
+
 1.  Go to the folder where you want to create the component:
 
     ```console
@@ -33,7 +59,7 @@ Containator will create a folder with your component's name, if the folder is al
 2.  Run containator where 'Awesome' is the name of your component:
 
     ```console
-    nico@coder:/Components$ containator create Awesome
+    nico@coder:/Components$ containator Awesome
     ```
 
 3.  Go inside to see the magic ✨
@@ -42,46 +68,21 @@ Containator will create a folder with your component's name, if the folder is al
     nico@coder:/Components$ cd Awesome && ls
     ```
 
-4.
+4. This will give you this folder structure with the default options:
 
-```
-Awesome
-├── AwesomeContainer.js
-├── AwesomePresenter.js
-├── index.js
-```
+    ```console
+    Awesome
+    ├── AwesomeContainer.js
+    ├── AwesomePresenter.js
+    ├-- AwesomeStyles.css
+    ├── index.js
+    ```
 
-### What about CSS?
-
-Containator can also create a CSS file for you and import it on the presenter component. You can use this by using:
-
-`containator create Awesome --css`
-
-That will create a folder with the component plus the CSS file imported on the presenter component:
-
-```
-Awesome
-├── AwesomeContainer.js
-├── AwesomePresenter.js
-├── Awesome.css
-├── index.js
-```
-
-### Is SCSS also supported?
-
-Sure! Just run `containator create Awesome --scss`
-
-### What if I use styled-components?
-
-It's also supported, just run:
-
-`containator create Awesome --styled`
-
-And your presenter.js will have an import to styled ready to be used.
 
 # How do the files look like?
 
-I'm glad you asked!
+With the default options:
+
 
 #### index.js:
 
@@ -105,19 +106,6 @@ class AwesomeContainer extends Component {
   }
 }
 export default AwesomeContainer;
-```
-
-#### AwesomePresenter.js without CSS:
-
-```js
-import React from "react";
-import PropTypes from "prop-types";
-
-const AwesomePresenter = ({}) => "Make something awesome!";
-
-AwesomePresenter.propTypes = {};
-
-export default AwesomePresenter;
 ```
 
 #### AwesomePresenter.js with CSS:
@@ -148,19 +136,74 @@ AwesomePresenter.propTypes = {};
 export default AwesomePresenter;
 ```
 
-# CLI Options
+#### AwesomePresenter.js with Styled Components:
 
-```console
-  Usage: create|c [options] <container>
+```js
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-  Creates a component
+const AwesomePresenter = ({}) => "Make something awesome!";
 
-  Options:
+AwesomePresenter.propTypes = {};
 
-    --styled    Creates a component with Styled Components import
-    --css       Creates a component with a .css file imported
-    -h, --help  output usage information
+export default AwesomePresenter;
 ```
+
+## With Typescript:
+
+#### AwesomeContainer.tsx
+
+```tsx
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import AwesomePresenter from "./AwesomePresenter";
+
+interface IProps {
+  [x: string]: any;
+}
+
+interface IState {
+  [x: string]: any;
+}
+
+class AwesomeContainer extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {};
+  }
+  static propTypes = {};
+  render() {
+    return <AwesomePresenter {...this.state} />;
+  }
+}
+
+export default AwesomeContainer;
+
+```
+
+
+#### AwesomeContainer.tsx with CSS
+
+
+````tsx
+import React from "react";
+import PropTypes from "prop-types";
+import "./SomethingStyles.css";
+
+interface IProps {
+  [x: string]: any;
+}
+
+const SomethingPresenter: React.SFC<IProps> = ({}) => (
+  <span>Make something awesome!</span>
+);
+
+SomethingPresenter.propTypes = {};
+
+export default SomethingPresenter;
+
+````
 
 # Credits
 

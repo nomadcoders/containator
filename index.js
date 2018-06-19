@@ -127,7 +127,6 @@ if (NO_COMMAND_SPECIFIED) {
       jsonOptions = JSON.parse(data);
       const styles = jsonOptions.styles || "css";
       const typescript = jsonOptions.typescript || false;
-      const interfaces = jsonOptions.interfaces || false;
       const componentName = program.args[0];
 
       const containerName = `${componentName[0].toUpperCase()}${componentName.substring(
