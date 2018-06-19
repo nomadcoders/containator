@@ -26,15 +26,59 @@ class ${name}Container extends Component {
 export default ${name}Container;
 `;
 
-const presenterContent = (name, styles) =>
-  `// import React from "react";
+const containerTsContent = name =>
+  `import React, { Component } from "react";
 // import PropTypes from "prop-types";
-${styles === "css" ? `import "./${name}Styles.css";\n` : ``}${
-    styles === "styled" ? `// import styled from "styled-components";\n` : ``
-  }
-const ${name}Presenter = ({}) => "Make something awesome!";
+import ${name}Presenter from "./${name}Presenter";
 
-${name}Presenter.propTypes = {};
+interface IProps {
+  [x: string]: any;
+}
+
+interface IState {
+  [x: string]: any;
+}
+
+class ${name}Container extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {};
+  }
+  static propTypes = {};
+  render() {
+    return <${name}Presenter {...this.state} />;
+  }
+}
+
+export default ${name}Container;
+`;
+
+const presenterTsContent = (name, styles) =>
+  `import React from "react";
+// import PropTypes from "prop-types";
+${styles === "css" ? `import "./${name}Styles.css";` : ""}
+${styles === "styled" ? `// import styled from "styled-components"` : ""}
+interface IProps {
+  [x: string]: any;
+}
+
+const SomethingPresenter: React.SFC<IProps> = ({}) => (
+  <span>Make something awesome!</span>
+);
+
+// ${name}Presenter.propTypes = {};
+
+export default ${name}Presenter;
+`;
+
+const presenterContent = (name, styles) =>
+  `import React from "react";
+// import PropTypes from "prop-types";
+${styles === "css" ? `import "./${name}Styles.css";` : ""}
+${styles === "styled" ? `// import styled from "styled-components"` : ""}
+const ${name}Presenter = ({}) => <span>Make something awesome!</span>;
+
+// ${name}Presenter.propTypes = {};
 
 export default ${name}Presenter;
 `;
@@ -94,6 +138,18 @@ if (NO_COMMAND_SPECIFIED) {
         // Folder
         fs.mkdirSync(containerName);
         if (typescript) {
+          // Index file
+          createFile(`${containerName}/index.ts`, indexContent(containerName));
+          // Container file
+          createFile(
+            `${containerName}/${containerName}Container.ts`,
+            containerTsContent(containerName)
+          );
+          // Presenter file
+          createFile(
+            `${containerName}/${containerName}Presenter.ts`,
+            presenterTsContent(componentName, styles)
+          );
         } else {
           // Index file
           createFile(`${containerName}/index.js`, indexContent(containerName));
@@ -102,7 +158,7 @@ if (NO_COMMAND_SPECIFIED) {
             `${containerName}/${containerName}Container.js`,
             containerContent(containerName)
           );
-          // Index file
+          // Presenter file
           createFile(
             `${containerName}/${containerName}Presenter.js`,
             presenterContent(componentName, styles)

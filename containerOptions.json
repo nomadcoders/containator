@@ -1,5 +1,4 @@
 {
   "styles": "css",
-  "typescript": false,
-  "interfaces": true
+  "typescript": true
 }
