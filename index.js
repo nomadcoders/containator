@@ -50,98 +50,9 @@ const createFile = (location, content, encoding = FILE_ENCODING) => {
 
 program
   .version("1.0.4")
-  .action(() => program.help())
   .description(
-    "CLI tool that generates awesome components following the Container/Presenter pattern for React Projects."
+    "Generate customizable React Components following the Container/Presenter Pattern."
   );
-
-program
-  .command("create <container>")
-  .option("--styled", "Creates a component with Styled Components import")
-  .option("--css", "Creates a component with a .css file imported")
-  .option("--scss", "Creates a component with a .scss file imported")
-  .alias("c")
-  .description("Creates a component")
-  .action((container, command) => {
-    /*
-        First we gotta capitalize the first letter of the command
-    */
-    const containerName = `${container[0].toUpperCase()}${container.substring(
-      1
-    )}`;
-    /*
-        We check if the folder exists.
-    */
-    if (!fs.existsSync(containerName)) {
-      /*
-        If it doesn't we create it.
-      */
-      fs.mkdirSync(containerName);
-      /*
-        We create the index file
-      */
-      createFile(`${containerName}/index.js`, indexContent(containerName));
-      /*
-        Then the container file
-      */
-      createFile(
-        `${containerName}/${containerName}Container.js`,
-        containerContent(containerName)
-      );
-      /*
-       We check if the user selected any of the available Styling options
-      */
-      if (command.styled || command.css || command.scss) {
-        if (command.styled) {
-          /*
-            If the user chose styled then we create a file
-            that has an import to styled components
-          */
-          createFile(
-            `${containerName}/${containerName}Presenter.js`,
-            presenterContent(containerName, false, true)
-          );
-          console.log(
-            `✨ ${containerName} Component created with Styled-Components 💅 (great taste btw)`
-          );
-        } else if (command.css) {
-          /*
-            If the user chose css then we create a file
-            that has an import to a css file and we 
-            create an empty css file.
-          */
-          createFile(
-            `${containerName}/${containerName}Presenter.js`,
-            presenterContent(containerName, true, false)
-          );
-          createFile(`${containerName}/${containerName}Styles.css`, "");
-          console.log(`✨ ${containerName} Component and CSS file created`);
-        } else if (command.scss) {
-          createFile(
-            `${containerName}/${containerName}Presenter.js`,
-            presenterContent(containerName, false, false, true)
-          );
-          createFile(`${containerName}/${containerName}Styles.scss`, "");
-          console.log(`✨ ${containerName} Component and SCSS file created`);
-        }
-      } else {
-        /*
-          If the user didn't select any of them we just
-          create a file with no imports
-        */
-        createFile(
-          `${containerName}/${containerName}Presenter.js`,
-          presenterContent(containerName)
-        );
-        console.log(`✨ ${containerName} Component created`);
-      }
-    } else {
-      /*
-        If it does, we refuse to do anything
-      */
-      console.log("Directory already exists, I refuse to delete it 😐");
-    }
-  });
 
 program.parse(process.argv);
 
@@ -151,4 +62,23 @@ var NO_COMMAND_SPECIFIED = program.args.length === 0;
 if (NO_COMMAND_SPECIFIED) {
   // e.g. display usage
   program.help();
+} else {
+  let options;
+  const nodeModulesPath = process.mainModule.paths
+    .filter(path => path.includes("node_modules"))
+    .shift();
+
+  const optionsFilePath = path.join(
+    nodeModulesPath,
+    "../containerOptions.json"
+  );
+  console.log(optionsFilePath);
+  /* fs.readFile(optionsFilePath, FILE_ENCODING, (err, data) => {
+    if (err) {
+      console.error(
+        "Couldn't read the config file, make sure you create a containerOptions.json file on the root of your project."
+      );
+      return;
+    } 
+  });*/
 }
