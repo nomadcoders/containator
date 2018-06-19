@@ -63,7 +63,6 @@ if (NO_COMMAND_SPECIFIED) {
   // e.g. display usage
   program.help();
 } else {
-  let options;
   const nodeModulesPath = process.mainModule.paths
     .filter(path => path.includes("node_modules"))
     .shift();
@@ -72,13 +71,19 @@ if (NO_COMMAND_SPECIFIED) {
     nodeModulesPath,
     "../containerOptions.json"
   );
-  console.log(optionsFilePath);
-  /* fs.readFile(optionsFilePath, FILE_ENCODING, (err, data) => {
-    if (err) {
+
+  fs.readFile(optionsFilePath, FILE_ENCODING, (err, data) => {
+    if (err || !data) {
       console.error(
         "Couldn't read the config file, make sure you create a containerOptions.json file on the root of your project."
       );
       return;
-    } 
-  });*/
+    }
+    if (data) {
+      jsonOptions = JSON.parse(data);
+      const styled = jsonOptions.styles || "css";
+      const typescript = jsonOptions.typescript || false;
+      const propTypes = jsonOptions.propTypes || false;
+    }
+  });
 }
