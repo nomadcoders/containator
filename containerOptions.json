@@ -1,5 +1,5 @@
 {
-  "styles": "styled",
-  "typescript": true,
-  "propTypes": true
+  "styles": "css",
+  "typescript": false,
+  "interfaces": true
 }

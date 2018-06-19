@@ -12,11 +12,11 @@ export default ${name}Container;`;
 
 const containerContent = name =>
   `import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import ${name}Presenter from "./${name}Presenter";
 
 class ${name}Container extends Component {
-  static propTypes = {};
+  // static propTypes = {};
   state = {};
   render() {
     return <${name}Presenter {...this.state} />;
@@ -26,12 +26,12 @@ class ${name}Container extends Component {
 export default ${name}Container;
 `;
 
-const presenterContent = (name, css = false, styled = false, scss = false) =>
-  `import React from "react";
-import PropTypes from "prop-types";
-${css ? `import "./${name}Styles.css";\n` : ``}${
-    styled ? `import styled from "styled-components";\n` : ``
-  }${scss ? `import "./${name}Styles.scss";\n` : ``}
+const presenterContent = (name, styles) =>
+  `// import React from "react";
+// import PropTypes from "prop-types";
+${styles === "css" ? `import "./${name}Styles.css";\n` : ``}${
+    styles === "styled" ? `// import styled from "styled-components";\n` : ``
+  }
 const ${name}Presenter = ({}) => "Make something awesome!";
 
 ${name}Presenter.propTypes = {};
@@ -81,9 +81,41 @@ if (NO_COMMAND_SPECIFIED) {
     }
     if (data) {
       jsonOptions = JSON.parse(data);
-      const styled = jsonOptions.styles || "css";
+      const styles = jsonOptions.styles || "css";
       const typescript = jsonOptions.typescript || false;
-      const propTypes = jsonOptions.propTypes || false;
+      const interfaces = jsonOptions.interfaces || false;
+      const componentName = program.args[0];
+
+      const containerName = `${componentName[0].toUpperCase()}${componentName.substring(
+        1
+      )}`;
+
+      if (!fs.existsSync(containerName)) {
+        // Folder
+        fs.mkdirSync(containerName);
+        if (typescript) {
+        } else {
+          // Index file
+          createFile(`${containerName}/index.js`, indexContent(containerName));
+          // Container file
+          createFile(
+            `${containerName}/${containerName}Container.js`,
+            containerContent(containerName)
+          );
+          // Index file
+          createFile(
+            `${containerName}/${containerName}Presenter.js`,
+            presenterContent(componentName, styles)
+          );
+          if (styles === "css") {
+            createFile(`${containerName}/${containerName}Styles.css`, "");
+          }
+        }
+      } else {
+        console.error(
+          "Component with that name already exists. Refusing to proceed."
+        );
+      }
     }
   });
 }
