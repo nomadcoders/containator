@@ -62,7 +62,7 @@ interface IProps {
   [x: string]: any;
 }
 
-const SomethingPresenter: React.SFC<IProps> = ({}) => (
+const ${name}Presenter: React.SFC<IProps> = ({}) => (
   <span>Make something awesome!</span>
 );
 
@@ -93,7 +93,7 @@ const createFile = (location, content, encoding = FILE_ENCODING) => {
 };
 
 program
-  .version("1.0.4")
+  .version("2.0.1")
   .description(
     "Generate customizable React Components following the Container/Presenter Pattern."
   );
